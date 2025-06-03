@@ -1,5 +1,8 @@
 const express = require("express");
+const mongoDBConnect = require("./db");
+
 const app = express();
+mongoDBConnect();
 const port = 5000;
 
 app.get("/", (req, res) => {
