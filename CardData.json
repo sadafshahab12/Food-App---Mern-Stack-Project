@@ -1,0 +1,113 @@
+[
+  {
+    "CategoryName": "Rice/Biryani",
+    "name": "Chicken Biryani",
+    "img": "https://www.cubesnjuliennes.com/wp-content/uploads/2020/07/Chicken-Biryani-Recipe.jpg",
+    "options": [
+      {
+        "half": "160",
+        "full": "280"
+      }
+    ],
+    "description": "Traditional Karachi-style biryani made with basmati rice, chicken, and rich Pakistani spices."
+  },
+  {
+    "CategoryName": "Rice/Biryani",
+    "name": "Beef Pulao",
+    "img": "https://i.ytimg.com/vi/8I58bXx49Vk/maxresdefault.jpg",
+    "options": [
+      {
+        "half": "150",
+        "full": "260"
+      }
+    ],
+    "description": "Aromatic beef yakhni pulao with whole spices, caramelized onions, and fragrant rice."
+  },
+  {
+    "CategoryName": "Rice/Biryani",
+    "name": "Sindhi Biryani",
+    "img": "https://img.sndimg.com/food/image/upload/q_92,fl_progressive,w_1200,c_scale/v1/img/recipes/17/59/50/picWkeh7U.jpg",
+    "options": [
+      {
+        "half": "170",
+        "full": "290"
+      }
+    ],
+    "description": "Spicy and tangy biryani from Sindh made with potatoes, chicken, and dried plums."
+  },
+  {
+    "CategoryName": "Starter",
+    "name": "Chicken Malai Boti",
+    "img": "https://www.chilitochoc.com/wp-content/uploads/2022/11/chicken-malai-boti-with-green-chutney-1.jpg",
+    "options": [
+      {
+        "half": "180",
+        "full": "300"
+      }
+    ],
+    "description": "Creamy marinated chicken chunks grilled to perfection on skewers."
+  },
+  {
+    "CategoryName": "Starter",
+    "name": "Beef Seekh Kebab",
+    "img": "https://www.teaforturmeric.com/wp-content/uploads/2018/10/Seekh-Kebab-4.jpg",
+    "options": [
+      {
+        "half": "160",
+        "full": "270"
+      }
+    ],
+    "description": "Minced beef mixed with spices, skewered and grilled over charcoal."
+  },
+  {
+    "CategoryName": "Starter",
+    "name": "Chicken Wings (Spicy Lahori)",
+    "img": "https://www.allrecipes.com/thmb/8SI7kuVs0lOwi7PiDvdou4Uzqe8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/241152-fried-chicken-wings-ddmfs-hero-3x4-1260-d37ffaac793c4db7a4ced4ab24a5d2ee.jpg",
+    "options": [
+      {
+        "half": "140",
+        "full": "240"
+      }
+    ],
+    "description": "Crispy Lahori-style chicken wings tossed in homemade masala sauce."
+  },
+  {
+    "CategoryName": "Pizza",
+    "name": "Chicken Tikka Pizza",
+    "img": "https://dha.cafeela.pk/wp-content/uploads/2021/10/chicken-tikka-pizza.jpg",
+    "options": [
+      {
+        "regular": "130",
+        "medium": "240",
+        "large": "370"
+      }
+    ],
+    "description": "A fusion of Italian pizza and Pakistani flavors with spicy chicken tikka topping."
+  },
+  {
+    "CategoryName": "Pizza",
+    "name": "Behari Kebab Pizza",
+    "img": "https://newforksnknives.com/wp-content/uploads/2024/07/56b69583d99e581de61fc593dc495a7f.jpg",
+    "options": [
+      {
+        "regular": "140",
+        "medium": "250",
+        "large": "380"
+      }
+    ],
+    "description": "Loaded with spicy Behari-style beef kebab, onions, and mozzarella cheese."
+  },
+  {
+    "CategoryName": "Pizza",
+    "name": "Vegetable Supreme Pizza",
+    "img": "https://www.nordicware.com/wp-content/uploads/2021/05/46400_traditional_pizza_pan_02_e.jpg",
+    "options": [
+      {
+        "regular": "120",
+        "medium": "220",
+        "large": "340"
+      }
+    ],
+    "description": "Topped with mushrooms, olives, capsicum, tomatoes, and onions on a cheesy base."
+  }
+]
