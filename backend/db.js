@@ -1,5 +1,5 @@
-require("dotenv").config();
-const mongoose = require("mongoose");
+require("dotenv").config(); //Loads environment variables
+const mongoose = require("mongoose"); //Mongoose is like a translator between your app and the MongoDB kitchen.
 const mongoURI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_CLUSTER}/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=food-cluster-01`;
 
 const mongoDBConnect = async () => {
@@ -10,11 +10,11 @@ const mongoDBConnect = async () => {
     });
     console.log("✅ Connected to MongoDB successfully");
 
-    const collection = mongoose.connection.db.collection("foodItem");
+    const collection = mongoose.connection.db.collection("fooditem");
     const data = await collection.find({}).toArray();
     console.log();
   } catch (error) {
-    console.error("❌ MongoDB connection error:", err);
+    console.error("❌ MongoDB connection error:", error);
   }
 };
 

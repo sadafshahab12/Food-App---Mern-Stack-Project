@@ -20,8 +20,8 @@ createUserRouter.post(
       .withMessage("Email is required")
       .isEmail()
       .withMessage("Invalid Email. Enter Valid Email.")
-      .isLength({ max: 100 })
-      .body("password")
+      .isLength({ max: 100 }),
+    body("password")
       .isLength({
         min: 8,
       })
