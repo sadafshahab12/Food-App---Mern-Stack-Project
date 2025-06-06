@@ -5,7 +5,6 @@ const UserSchema = new Schema({
   name: {
     type: String,
     required: true,
-    trim: true,
   },
   location: {
     type: String,
