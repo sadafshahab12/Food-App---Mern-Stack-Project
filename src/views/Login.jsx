@@ -11,7 +11,7 @@ const Login = () => {
     e.preventDefault();
 
     // it is post method with url we have to send body , data  coming from user through this form
-    const response = await fetch("http://localhost:5000/login/login-user", {
+    const response = await fetch("http://localhost:5000/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

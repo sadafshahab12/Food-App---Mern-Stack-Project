@@ -4,7 +4,7 @@ const loginUserRouter = express.Router();
 const { loginUserController } = require("../controllers/loginUserController");
 
 loginUserRouter.post(
-  "/login-user",
+  "/login",
   [
     body("email")
       .trim()

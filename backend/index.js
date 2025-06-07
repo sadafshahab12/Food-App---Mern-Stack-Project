@@ -19,8 +19,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
-app.use("/signup", createUserRouter);
-app.use("/login", loginUserRouter);
+app.use("/auth", createUserRouter);
+app.use("/auth", loginUserRouter);
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

@@ -11,7 +11,7 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // it is post method with url we have to send body , data  coming from user through this form
-    const response = await fetch("http://localhost:5000/signup/create-user", {
+    const response = await fetch("http://localhost:5000/auth/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

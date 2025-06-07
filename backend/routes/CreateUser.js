@@ -6,7 +6,7 @@ const { createUserController } = require("../controllers/createUserController");
 //data inserted successfully
 
 createUserRouter.post(
-  "/create-user",
+  "/signup",
   [
     body("name")
       .trim()
