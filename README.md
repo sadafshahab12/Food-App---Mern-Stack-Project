@@ -16,3 +16,5 @@ const data = await collection.find({}).toArray();
 mongoose provide us schema for data validation
 
 npm i --save express-validator
+
+auth token secret : node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"

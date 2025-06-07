@@ -7,12 +7,6 @@ const app = express();
 mongoDBConnect();
 const port = 5000;
 
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With , Content-Type, Accept"
-//   );
 app.use(
   cors({
     origin: "http://localhost:5173",
