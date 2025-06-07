@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
-const Carousel = ({ carouselContent }) => {
+const Carousel = ({ carouselContent, onSearch }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [animate, setAnimate] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
   //auto slide in every 3 second
   useEffect(() => {
     const interval = setInterval(() => {
@@ -37,6 +38,11 @@ const Carousel = ({ carouselContent }) => {
     }, 500);
     setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselContent.length);
   };
+
+  const handleSearch = () => {
+    onSearch(searchInput);
+    setSearchInput("")
+  };
   return (
     <div className="carousel relative h-screen overflow-hidden">
       <button
@@ -68,14 +74,18 @@ const Carousel = ({ carouselContent }) => {
         <div className="absolute top-[90%] -translate-y-[50%] flex ">
           <div className="relative ">
             <input
-              type="search"
+              type="text"
               placeholder="Search"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
               aria-label="Search"
               className="border border-white focus:ring-2 focus:ring-cyan-950  py-2 px-3 max-w-[600px] w-143 rounded-lg bg-gray-200 outline-none transition duration-200 ease-in"
             />
             <IoIosSearch
               size={22}
-              className="cursor-pointer absolute top-2.5 right-4 "
+              className="cursor-pointer absolute top-2.5 right-4 hover:scale-105 active:scale-95 "
+              onClick={handleSearch}
             />
           </div>
         </div>
