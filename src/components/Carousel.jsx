@@ -57,7 +57,7 @@ const Carousel = ({ carouselContent }) => {
                 : "opacity-100 scale-100 translate-x-0"
             }`}
         />
-        <div className="absolute top-[55%] translate-y-[50%] bottom-40 left-1/2 transform -translate-x-1/2 bg-black opacity-60 text-white px-6 py-4 rounded-xl text-center max-w-xl w-[90%]">
+        <div className="absolute top-[60%] translate-y-[50%] bottom-45   left-1/2 transform -translate-x-1/2 bg-black opacity-60 text-white px-6 py-4 rounded-xl text-center max-w-xl w-[90%]">
           <h1 className="text-3xl text-white font-bold">
             {carouselContent[currentIndex].title}
           </h1>
