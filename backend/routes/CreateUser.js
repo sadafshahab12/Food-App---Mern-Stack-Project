@@ -1,6 +1,6 @@
 const express = require("express");
 const createUserRouter = express.Router();
-const { body} = require("express-validator");
+const { body } = require("express-validator");
 const { createUserController } = require("../controllers/createUserController");
 
 //data inserted successfully

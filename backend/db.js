@@ -9,10 +9,16 @@ const mongoDBConnect = async () => {
       useUnifiedTopology: true,
     });
     console.log("✅ Connected to MongoDB successfully");
-
-    const collection = mongoose.connection.db.collection("fooditem");
-    const data = await collection.find({}).toArray();
-    global.foodItems = data;
+    // food collection
+    const foodCollection = mongoose.connection.db.collection("fooditem");
+    const foodCollectionData = await foodCollection.find({}).toArray();
+    // category collection
+    const foodCategoryCollection =
+      mongoose.connection.db.collection("foodcategory");
+    const categoryData = await foodCategoryCollection.find({}).toArray();
+    //global variable
+    global.foodItems = foodCollectionData;
+    global.foodCategory = categoryData;
   } catch (error) {
     console.error("❌ MongoDB connection error:", error);
   }

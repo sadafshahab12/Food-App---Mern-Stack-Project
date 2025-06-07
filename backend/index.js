@@ -3,11 +3,12 @@ const mongoDBConnect = require("./db");
 const cors = require("cors");
 const loginUserRouter = require("./routes/LoginUser");
 const createUserRouter = require("./routes/CreateUser");
+const foodDataRouter = require("./routes/FoodData");
 const app = express();
 mongoDBConnect();
 const port = 5000;
 
-app.use( 
+app.use(
   cors({
     origin: "http://localhost:5173",
     methods: ["GET", "POST", "OPTIONS"],
@@ -21,6 +22,7 @@ app.get("/", (req, res) => {
 });
 app.use("/auth", createUserRouter);
 app.use("/auth", loginUserRouter);
+app.use("/api", foodDataRouter);
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
