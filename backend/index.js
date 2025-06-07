@@ -7,7 +7,7 @@ const app = express();
 mongoDBConnect();
 const port = 5000;
 
-app.use(
+app.use( 
   cors({
     origin: "http://localhost:5173",
     methods: ["GET", "POST", "OPTIONS"],
