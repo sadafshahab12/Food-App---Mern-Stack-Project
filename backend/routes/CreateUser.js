@@ -1,8 +1,7 @@
 const express = require("express");
 const createUserRouter = express.Router();
-const User = require("../model/User");
-const { body, validationResult } = require("express-validator");
-const bcrypt = require("bcryptjs");
+const { body} = require("express-validator");
+const { createUserController } = require("../controllers/createUserController");
 
 //data inserted successfully
 
@@ -36,28 +35,7 @@ createUserRouter.post(
       .matches(/[^A-Za-z0-9]/)
       .withMessage("Password must contain at least one special character"),
   ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    const { name, location, email, password } = req.body;
-    const salt = await bcrypt.genSalt(10);
-    const securePassword = await bcrypt.hash(password, salt);
-    try {
-      const trimedName = name.replace(/\s+/g, " ").trim();
-      await User.create({
-        name: trimedName,
-        location: location,
-        password: securePassword,
-        email: email,
-      });
-      res.json({ success: true });
-    } catch (error) {
-      console.log(error);
-      res.json({ success: false });
-    }
-  }
+  createUserController
 );
 
 module.exports = createUserRouter;
