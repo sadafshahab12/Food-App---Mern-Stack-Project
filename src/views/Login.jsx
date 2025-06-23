@@ -27,8 +27,8 @@ const Login = () => {
     if (!data.success) {
       alert("Invalid Credentials.");
     } else {
-      localStorage.setItem("authToken" , data.authToken)
-      console.log(localStorage.getItem("authToken"))
+      localStorage.setItem("userEmail", userCredentials.email);
+      localStorage.setItem("authToken", data.authToken);
       navigate("/");
     }
   };

@@ -4,6 +4,7 @@ const cors = require("cors");
 const loginUserRouter = require("./routes/LoginUser");
 const createUserRouter = require("./routes/CreateUser");
 const foodDataRouter = require("./routes/FoodData");
+const orderDataRouter = require("./routes/OrderData");
 const app = express();
 mongoDBConnect();
 const port = 5000;
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
 app.use("/auth", createUserRouter);
 app.use("/auth", loginUserRouter);
 app.use("/api", foodDataRouter);
+app.use("/api", orderDataRouter);
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

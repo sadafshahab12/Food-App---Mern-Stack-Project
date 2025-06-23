@@ -4,10 +4,7 @@ const mongoURI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${
 
 const mongoDBConnect = async () => {
   try {
-    await mongoose.connect(mongoURI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(mongoURI);
     console.log("✅ Connected to MongoDB successfully");
     // food collection
     const foodCollection = mongoose.connection.db.collection("fooditem");

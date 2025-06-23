@@ -8,6 +8,7 @@ const SignUp = () => {
     email: "",
     password: "",
   });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // it is post method with url we have to send body , data  coming from user through this form
