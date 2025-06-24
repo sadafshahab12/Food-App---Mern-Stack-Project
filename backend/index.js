@@ -9,7 +9,7 @@ const orderDataRouter = require("./routes/OrderData");
 const myOrderDataRouter = require("./routes/myOrderData");
 const app = express();
 mongoDBConnect();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT 
 
 app.use(
   cors({
