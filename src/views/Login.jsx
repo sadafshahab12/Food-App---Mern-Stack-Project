@@ -30,7 +30,6 @@ const Login = () => {
     });
     const data = await response.json();
 
-
     if (!data.success) {
       const newError = { email: "", password: "" };
 
@@ -48,6 +47,9 @@ const Login = () => {
     } else {
       localStorage.setItem("userEmail", userCredentials.email);
       localStorage.setItem("authToken", data.authToken);
+      toast.success("Login Successfully!", {
+        duration: 2000,
+      });
       navigate("/");
     }
   };

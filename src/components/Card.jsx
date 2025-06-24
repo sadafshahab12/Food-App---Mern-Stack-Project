@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useCart, useDispatchCard } from "./ContextReducer";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Card = ({ item }) => {
   const dispatch = useDispatchCard();
   const stateData = useCart();
   const priceRef = useRef();
+  const navigate = useNavigate();
   const sizeOptions =
     item.options && item.options.length > 0 ? item.options[0] : {};
   const [qty, setQty] = useState(1);
@@ -16,6 +18,18 @@ const Card = ({ item }) => {
   }, []);
 
   const handleAddToCart = async () => {
+    const authToken = localStorage.getItem("authToken");
+    if (!authToken) {
+      toast.error("Please login to add items to your cart!", {
+        duration: 1500,
+        style: {
+          background: "#ffe4e6",
+          color: "#b91c1c",
+          border: "2px solid red",
+        },
+      });
+      return navigate("/login");
+    }
     const existingItem = stateData.find(
       (cartItem) => cartItem.id === item._id && cartItem.size === size
     );
@@ -46,7 +60,7 @@ const Card = ({ item }) => {
       style: {
         background: "#f9dfc3",
         color: "#333",
-        border : "2px solid orange"
+        border: "2px solid orange",
       },
     });
   };

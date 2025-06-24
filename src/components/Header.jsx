@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Modal from "./Modal";
 import Cart from "../views/Cart";
 import { useCart } from "./ContextReducer";
+import toast from "react-hot-toast";
 
 const Header = () => {
   const [isToggle, setIsToggle] = useState(false);
@@ -26,6 +27,9 @@ const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
+    toast.success("Logout Successfully.Thank you for visiting! ", {
+      duration: 2000,
+    });
     navigate("/login");
   };
   return (
@@ -92,7 +96,7 @@ const Header = () => {
               ) : null}
               <button
                 onClick={handleLogout}
-                className=" border border-orange-300 py-1 px-2 text-orange-300 rounded-md text-[10px] flex items-center gap-2"
+                className=" border border-orange-300 py-1 px-2 text-orange-300 rounded-md text-[10px] flex items-center gap-2 cursor-pointer"
               >
                 <IoIosLogOut size={22} />
                 <p>Logout</p>
@@ -178,7 +182,7 @@ const Header = () => {
                     handleLogout();
                     handleMenu();
                   }}
-                  className="border border-orange-300 py-1 px-2 text-orange-300 rounded-md text-[10px] flex items-center gap-2"
+                  className="border border-orange-300 py-1 px-2 text-orange-300 rounded-md text-[10px] flex items-center gap-2 cursor-pointer"
                 >
                   <IoIosLogOut size={22} />
                   <p>Logout</p>

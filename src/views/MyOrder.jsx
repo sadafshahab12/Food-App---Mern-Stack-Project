@@ -16,7 +16,6 @@ const MyOrder = () => {
           }),
         });
         const response = await data.json();
-        console.log(response);
         setMyOrder(response);
       } catch (error) {
         console.error("Error fetching data:", error);

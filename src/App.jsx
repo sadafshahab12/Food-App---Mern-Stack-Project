@@ -7,6 +7,7 @@ import SignUp from "./views/SignUp";
 import Footer from "./views/Footer";
 import { CartProvider } from "./components/ContextReducer";
 import { Toaster } from "react-hot-toast";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       />
       <CartProvider>
         <BrowserRouter>
+          <ScrollToTop />
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />

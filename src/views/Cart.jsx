@@ -28,7 +28,6 @@ const Cart = ({ closeCart }) => {
         order_date: new Date().toDateString(),
       }),
     });
-    console.log(checkOutData);
     const response = await checkOutData.json();
     if (response.success === true) {
       dispatch({ type: "DROP" });
