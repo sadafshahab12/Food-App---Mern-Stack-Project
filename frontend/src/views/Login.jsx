@@ -18,7 +18,7 @@ const Login = () => {
     e.preventDefault();
 
     // it is post method with url we have to send body , data  coming from user through this form
-    const response = await fetch(`${import.meta.env.VITE_REACT_BACKEND_BASE_URL}auth/login`, {
+    const response = await fetch(`${import.meta.env.VITE_REACT_BACKEND_BASE_URL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -18,7 +18,7 @@ const Cart = ({ closeCart }) => {
   const handleCheckOut = async () => {
     let userEmail = localStorage.getItem("userEmail");
     let checkOutData = await fetch(
-      `${import.meta.env.VITE_REACT_BACKEND_BASE_URL}api/order-data`,
+      `${import.meta.env.VITE_REACT_BACKEND_BASE_URL}/api/order-data`,
       {
         method: "POST",
         headers: {

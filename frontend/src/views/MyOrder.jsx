@@ -6,7 +6,7 @@ const MyOrder = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetch(`${import.meta.env.VITE_REACT_BACKEND_BASE_URL}api/my-order-data`, {
+        const data = await fetch(`${import.meta.env.VITE_REACT_BACKEND_BASE_URL}/api/my-order-data`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
