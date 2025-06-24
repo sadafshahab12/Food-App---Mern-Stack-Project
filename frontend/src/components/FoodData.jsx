@@ -6,37 +6,48 @@ const FoodData = ({ searchTerm }) => {
   const [foodCategory, setFoodCategory] = useState([]);
 
   const fetchData = async () => {
-    const response = await fetch(
-      `${import.meta.env.VITE_REACT_BACKEND_BASE_URL}/api/food-data`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_REACT_BACKEND_BASE_URL}/api/food-data`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const foodData = await response.json();
+
+      // Defensive check in case response is malformed
+      if (Array.isArray(foodData) && foodData.length >= 2) {
+        setFoodItems(foodData[0] || []);
+        setFoodCategory(foodData[1] || []);
+      } else {
+        console.error("Unexpected data structure:", foodData);
+        setFoodItems([]);
+        setFoodCategory([]);
       }
-    );
-    const foodData = await response.json();
-    setFoodItems(foodData[0]);
-    setFoodCategory(foodData[1]);
+    } catch (error) {
+      console.error("Error fetching food data:", error);
+      setFoodItems([]);
+      setFoodCategory([]);
+    }
   };
 
-  // Load data on first render
   useEffect(() => {
     fetchData();
   }, []);
 
   return (
     <div>
-      {foodCategory.map((category, index) => {
-        return (
-          <div
-            key={index} // unique key here
-          >
+      {foodCategory && foodCategory.length > 0 ? (
+        foodCategory.map((category, index) => (
+          <div key={index}>
             <div className="text-xl font-bold cursor-pointer border-b border-slate-300 py-4 px-10 mx-10">
               {category.CategoryName}
             </div>
             <div className="my-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-self-center px-6">
-              {foodItems.length > 0 ? (
+              {foodItems && foodItems.length > 0 ? (
                 foodItems
                   .filter(
                     (items) =>
@@ -53,8 +64,12 @@ const FoodData = ({ searchTerm }) => {
               )}
             </div>
           </div>
-        );
-      })}
+        ))
+      ) : (
+        <div className="text-center text-gray-500 py-10">
+          No categories found.
+        </div>
+      )}
     </div>
   );
 };
