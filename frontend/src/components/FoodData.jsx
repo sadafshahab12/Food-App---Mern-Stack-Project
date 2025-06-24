@@ -72,20 +72,16 @@ const FoodData = ({ searchTerm }) => {
                     <Card key={filterItems._id} item={filterItems} />
                   ))
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 p-6 max-w-6xl mx-auto">
-                  {[1, 2, 3, 4, 5, 6].map((n) => (
-                    <Skeleton key={n} />
-                  ))}
+                <div>
+                  <p>No Category Found</p>
                 </div>
               )}
             </div>
           </div>
         ))
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 p-6 max-w-6xl mx-auto">
-          {[1, 2, 3, 4, 5, 6].map((n) => (
-            <Skeleton key={n} />
-          ))}
+        <div>
+          <p>No Category Found</p>
         </div>
       )}
     </div>

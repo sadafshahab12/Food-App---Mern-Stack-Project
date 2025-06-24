@@ -87,14 +87,7 @@ const MyOrder = () => {
         ))
       ) : (
         <>
-          <div className="mb-8">
-            <div className="h-6 w-40 bg-gray-200 animate-pulse mb-4 rounded"></div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
-              {[1, 2, 3, 4, 5, 6].map((n) => (
-                <Skeleton key={n} />
-              ))}
-            </div>
-          </div>
+          <div>No order place yet.</div>
         </>
       )}
     </div>
