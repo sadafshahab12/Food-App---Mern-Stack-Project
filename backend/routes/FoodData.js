@@ -8,7 +8,7 @@ foodDataRouter.post("/food-data", (req, res) => {
 
     console.log("Backend Data Being Sent:", foodItems, foodCategory);
 
-    res.send([foodItems, foodCategory]);
+    res.send([foodItems, foodCategory]); 
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ message: "Internal Server Error" });
