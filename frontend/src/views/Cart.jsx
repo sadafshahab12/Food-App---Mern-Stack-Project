@@ -17,17 +17,20 @@ const Cart = ({ closeCart }) => {
   let totalPrice = data.reduce((total, food) => total + food.price, 0);
   const handleCheckOut = async () => {
     let userEmail = localStorage.getItem("userEmail");
-    let checkOutData = await fetch("http://localhost:5000/api/order-data", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        order_data: data,
-        email: userEmail,
-        order_date: new Date().toDateString(),
-      }),
-    });
+    let checkOutData = await fetch(
+      `${import.meta.env.VITE_REACT_BACKEND_BASE_URL}/api/order-data`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          order_data: data,
+          email: userEmail,
+          order_date: new Date().toDateString(),
+        }),
+      }
+    );
     const response = await checkOutData.json();
     if (response.success === true) {
       dispatch({ type: "DROP" });
