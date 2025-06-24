@@ -5,6 +5,7 @@ const loginUserRouter = require("./routes/LoginUser");
 const createUserRouter = require("./routes/CreateUser");
 const foodDataRouter = require("./routes/FoodData");
 const orderDataRouter = require("./routes/OrderData");
+const myOrderDataRouter = require("./routes/myOrderData");
 const app = express();
 mongoDBConnect();
 const port = 5000;
@@ -25,6 +26,7 @@ app.use("/auth", createUserRouter);
 app.use("/auth", loginUserRouter);
 app.use("/api", foodDataRouter);
 app.use("/api", orderDataRouter);
+app.use("/api", myOrderDataRouter);
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
