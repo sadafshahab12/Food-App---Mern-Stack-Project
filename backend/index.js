@@ -22,7 +22,7 @@ app.use(
 app.use(helmet);
 app.use(express.json());
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.redirect(process.env.FRONT_END_URL);
 });
 app.use("/auth", createUserRouter);
 app.use("/auth", loginUserRouter);
