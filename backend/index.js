@@ -15,7 +15,6 @@ app.use(
   cors({
     origin: process.env.FRONT_END_URL,
     methods: ["GET", "POST", "OPTIONS"],
-    allowedHeaders: ["Content-Type"],
   })
 );
 
