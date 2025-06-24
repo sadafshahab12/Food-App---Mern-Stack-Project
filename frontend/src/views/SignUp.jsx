@@ -28,7 +28,7 @@ const SignUp = () => {
     e.preventDefault();
 
     const response = await fetch(
-      `${import.meta.env.VITE_REACT_BACKEND_BASE_URL}/auth/signup`,
+      `${import.meta.env.VITE_REACT_BACKEND_BASE_URL}auth/signup`,
       {
         method: "POST",
         headers: {

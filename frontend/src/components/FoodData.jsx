@@ -5,7 +5,7 @@ const FoodData = ({ searchTerm }) => {
   const [foodItems, setFoodItems] = useState([]);
   const [foodCategory, setFoodCategory] = useState([]);
   const fetchData = async () => {
-    const response = await fetch(`${import.meta.env.VITE_REACT_BACKEND_BASE_URL}/api/food-data`, {
+    const response = await fetch(`${import.meta.env.VITE_REACT_BACKEND_BASE_URL}api/food-data`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
