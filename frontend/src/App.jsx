@@ -8,6 +8,8 @@ import Footer from "./views/Footer";
 import { CartProvider } from "./components/ContextReducer";
 import { Toaster } from "react-hot-toast";
 import ScrollToTop from "./components/ScrollToTop";
+import About from "./views/About";
+import Contact from "./views/Contact";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
             <Route path="/my-order" element={<MyOrder />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
           </Routes>
           <Footer />
         </BrowserRouter>
