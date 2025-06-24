@@ -35,7 +35,7 @@ const FoodData = ({ searchTerm }) => {
     } finally {
       setTimeout(() => {
         setIsLoading(false); // 👈 loading finished here
-      }, 2000);
+      }, 1500);
     }
   };
 
@@ -47,7 +47,7 @@ const FoodData = ({ searchTerm }) => {
     <div>
       {isLoading ? (
         // Show Skeletons while loading
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 p-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 p-6 max-w-6xl mx-auto">
           {[1, 2, 3, 4, 5, 6].map((n) => (
             <Skeleton key={n} />
           ))}
@@ -72,14 +72,20 @@ const FoodData = ({ searchTerm }) => {
                     <Card key={filterItems._id} item={filterItems} />
                   ))
               ) : (
-                <div>No data found for this category.</div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 p-6 max-w-6xl mx-auto">
+                  {[1, 2, 3, 4, 5, 6].map((n) => (
+                    <Skeleton key={n} />
+                  ))}
+                </div>
               )}
             </div>
           </div>
         ))
       ) : (
-        <div className="text-center text-gray-500 py-10">
-          No categories found.
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 p-6 max-w-6xl mx-auto">
+          {[1, 2, 3, 4, 5, 6].map((n) => (
+            <Skeleton key={n} />
+          ))}
         </div>
       )}
     </div>

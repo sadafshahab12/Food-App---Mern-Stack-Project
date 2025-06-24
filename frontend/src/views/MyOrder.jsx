@@ -27,7 +27,7 @@ const MyOrder = () => {
       } finally {
         setTimeout(() => {
           setIsLoading(false); // done loading
-        }, 2000);
+        }, 1500);
       }
     };
 
@@ -35,14 +35,14 @@ const MyOrder = () => {
   }, []);
 
   return (
-    <div className="mt-40 max-w-6xl mx-auto px-6 min-h-screen">
+    <div className="mt-40 max-w-6xl mx-auto px-6 min-h-screen mb-20">
       {isLoading ? (
         // Show skeletons while loading
         <>
           <div className="mb-8">
             <div className="h-6 w-40 bg-gray-200 animate-pulse mb-4 rounded"></div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {[1, 2, 3].map((n) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
+              {[1, 2, 3, 4, 5, 6].map((n) => (
                 <Skeleton key={n} />
               ))}
             </div>
@@ -83,9 +83,16 @@ const MyOrder = () => {
           </div>
         ))
       ) : (
-        <p className="text-center text-lg text-slate-600 mt-10">
-          No orders placed yet.
-        </p>
+        <>
+          <div className="mb-8">
+            <div className="h-6 w-40 bg-gray-200 animate-pulse mb-4 rounded"></div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
+              {[1, 2, 3, 4, 5, 6].map((n) => (
+                <Skeleton key={n} />
+              ))}
+            </div>
+          </div>
+        </>
       )}
     </div>
   );
