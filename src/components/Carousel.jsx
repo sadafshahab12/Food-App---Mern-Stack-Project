@@ -44,7 +44,7 @@ const Carousel = ({ carouselContent, onSearch }) => {
     setSearchInput("")
   };
   return (
-    <div className="carousel relative h-screen overflow-hidden">
+    <div className="carousel relative h-[80vh] sm:h-screen overflow-hidden">
       <button
         onClick={goToPrevious}
         className="absolute top-[50%] translate-y-[50%] bg-slate-300 h-10 w-10 rounded-full cursor-pointer p-2 left-2 z-10"
@@ -63,7 +63,7 @@ const Carousel = ({ carouselContent, onSearch }) => {
                 : "opacity-100 scale-100 translate-x-0"
             }`}
         />
-        <div className="absolute top-[60%] translate-y-[50%] bottom-45   left-1/2 transform -translate-x-1/2 bg-black opacity-60 text-white px-6 py-4 rounded-xl text-center max-w-xl w-[90%]">
+        <div className="absolute top-[60%] translate-y-[50%] bottom-45   left-1/2 transform -translate-x-1/2 bg-black opacity-60 text-white px-6 py-4 rounded-xl text-center max-w-xl w-[90%] sm:block hidden">
           <h1 className="text-3xl text-white font-bold">
             {carouselContent[currentIndex].title}
           </h1>
@@ -71,7 +71,7 @@ const Carousel = ({ carouselContent, onSearch }) => {
             {carouselContent[currentIndex].desc}
           </p>
         </div>
-        <div className="absolute top-[90%] -translate-y-[50%] flex ">
+        <div className="absolute top-[80%] sm:top-[90%] -translate-y-[50%] flex ">
           <div className="relative ">
             <input
               type="text"
@@ -80,7 +80,7 @@ const Carousel = ({ carouselContent, onSearch }) => {
               onChange={(e) => setSearchInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
               aria-label="Search"
-              className="border border-white focus:ring-2 focus:ring-cyan-950  py-2 px-3 max-w-[600px] w-143 rounded-lg bg-gray-200 outline-none transition duration-200 ease-in"
+              className="border border-white focus:ring-2 focus:ring-cyan-950  py-2 px-3 max-w-[600px] w-70 sm:w-143 rounded-lg bg-gray-200 outline-none transition duration-200 ease-in"
             />
             <IoIosSearch
               size={22}

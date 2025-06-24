@@ -13,7 +13,7 @@ const Header = () => {
   const location = useLocation();
   const authToken = localStorage.getItem("authToken");
   const navigate = useNavigate();
-  const data = useCart()
+  const data = useCart();
   const handleMenu = () => {
     setIsToggle(!isToggle);
   };
@@ -59,7 +59,7 @@ const Header = () => {
         </nav>
         <div className="text-sm">
           {!authToken ? (
-            <div className="flex justify-center items-center gap-2">
+            <div className="hidden md:flex justify-center items-center gap-2">
               <Link
                 to="/login"
                 className="bg-orange-300 py-1 px-4 text-black rounded-md"
@@ -74,7 +74,7 @@ const Header = () => {
               </Link>
             </div>
           ) : (
-            <div className="flex justify-center items-center gap-2">
+            <div className="hidden md:flex  justify-center items-center gap-2">
               <div
                 className="bg-orange-300 py-1 px-2 text-black rounded-md relative cursor-pointer"
                 onClick={() => setCartView(true)}
@@ -87,12 +87,12 @@ const Header = () => {
               {cartView ? (
                 <Modal onClose={() => setCartView(false)}>
                   {" "}
-                  <Cart closeCart = {()=>setCartView(false)}/>
+                  <Cart closeCart={() => setCartView(false)} />
                 </Modal>
               ) : null}
               <button
                 onClick={handleLogout}
-                className="border border-orange-300 py-1 px-2 text-orange-300 rounded-md text-[10px] flex items-center gap-2"
+                className=" border border-orange-300 py-1 px-2 text-orange-300 rounded-md text-[10px] flex items-center gap-2"
               >
                 <IoIosLogOut size={22} />
                 <p>Logout</p>
@@ -101,26 +101,93 @@ const Header = () => {
           )}
         </div>
         {/* mobile navbar  */}
-        <nav className="md:hidden block z-10">
-          <div
-            className={`flex flex-col  items-center text-sm gap-10 fixed top-16 ${
-              isToggle ? "right-0" : "-right-full"
-            }  w-[80%] sm:w-[60%] bg-slate-800 py-10 h-screen transition-all duration-300 ease-in`}
-          >
-            <Link to="/" onClick={handleMenu}>
+        <nav
+          className={`md:hidden block absolute top-14 ${
+            isToggle ? "left-0" : "-left-full"
+          } bg-slate-800 w-full h-screen z-50 transition-all ease-in duration-300`}
+        >
+          <div className="flex flex-col items-center p-5 gap-8">
+            <Link to="/" className={`${isActive("/")}`} onClick={handleMenu}>
               Home
             </Link>
-            <Link to="/login" onClick={handleMenu}>
-              Login
+            {authToken ? (
+              <Link
+                to="/my-order"
+                className={`${isActive("/my-order")}`}
+                onClick={handleMenu}
+              >
+                My Order
+              </Link>
+            ) : (
+              ""
+            )}
+            <Link
+              to="/about"
+              className={`${isActive("/about")}`}
+              onClick={handleMenu}
+            >
+              About
             </Link>
-            <Link to="/my-order" onClick={handleMenu}>
-              My Order
-            </Link>
-            <Link to="/signup" onClick={handleMenu}>
-              Signup
+            <Link
+              to="/contact"
+              className={`${isActive("/contact")}`}
+              onClick={handleMenu}
+            >
+              Contact
             </Link>
           </div>
+          <div className="text-sm">
+            {!authToken ? (
+              <div className="flex flex-col justify-center items-center gap-8">
+                <Link
+                  to="/login"
+                  className="bg-orange-300 py-1 px-4 text-black rounded-md"
+                  onClick={handleMenu}
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/signup"
+                  className="border border-orange-300 py-1 px-4 text-orange-300 rounded-md"
+                  onClick={handleMenu}
+                >
+                  Signup
+                </Link>
+              </div>
+            ) : (
+              <div className="flex flex-col justify-center items-center gap-8">
+                <div
+                  className="bg-orange-300 py-1 px-2 text-black rounded-md relative cursor-pointer"
+                  onClick={() => {
+                    setCartView(true), handleMenu();
+                  }}
+                >
+                  <IoCartOutline size={22} />
+                  <p className="h-5 w-5 bg-slate-500 text-white rounded-full absolute flex justify-center items-center -top-2 -left-2 border border-amber-400 text-[12px] ">
+                    {data.length}
+                  </p>
+                </div>
+                {cartView ? (
+                  <Modal onClose={() => setCartView(false)}>
+                    {" "}
+                    <Cart closeCart={() => setCartView(false)} />
+                  </Modal>
+                ) : null}
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    handleMenu();
+                  }}
+                  className="border border-orange-300 py-1 px-2 text-orange-300 rounded-md text-[10px] flex items-center gap-2"
+                >
+                  <IoIosLogOut size={22} />
+                  <p>Logout</p>
+                </button>
+              </div>
+            )}
+          </div>
         </nav>
+
         <div className="md:hidden block">
           {isToggle ? (
             <IoClose

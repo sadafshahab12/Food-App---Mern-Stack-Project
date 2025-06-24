@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { useCart, useDispatchCard } from "../components/ContextReducer";
 import { FaRegTrashAlt } from "react-icons/fa";
 
@@ -35,6 +36,17 @@ const Cart = ({ closeCart }) => {
         closeCart();
       }, 500);
     }
+    toast.success(
+      `Thank you for shopping with us! Your order has been placed. `,
+      {
+        duration: 2000,
+        style: {
+          background: "#f9dfc3",
+          color: "#333",
+          border: "2px solid orange",
+        },
+      }
+    );
   };
   return (
     <div className="overflow-x-auto rounded-xl shadow-md mt-4 p-4 bg-white">
@@ -68,7 +80,19 @@ const Cart = ({ closeCart }) => {
               </td>
               <td className="py-2 px-4 border border-slate-300 text-center">
                 <button
-                  onClick={() => dispatch({ type: "REMOVE", index: index })}
+                  onClick={() => {
+                    dispatch({ type: "REMOVE", index: index }),
+                      toast.success(
+                        `${food.name} successfully removed from your cart. `,
+                        {
+                          duration: 1000,
+                          style: {
+                            background: "#333",
+                            color: "#fff",
+                          },
+                        }
+                      );
+                  }}
                   className="text-red-600 hover:text-red-800 transition duration-200 cursor-pointer"
                   title="Remove Item"
                 >

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useCart, useDispatchCard } from "./ContextReducer";
+import toast from "react-hot-toast";
 
 const Card = ({ item }) => {
   const dispatch = useDispatchCard();
@@ -40,16 +41,24 @@ const Card = ({ item }) => {
         size: size,
       });
     }
+    toast.success(`${item.name} added to your cart. Ready when you are! `, {
+      duration: 1000,
+      style: {
+        background: "#f9dfc3",
+        color: "#333",
+        border : "2px solid orange"
+      },
+    });
   };
 
   const totalPrice = qty * parseInt(sizeOptions[size] || 0);
 
   return (
-    <div className="bg-white shadow-lg max-w-[500px] w-[350px] rounded-lg">
+    <div className="bg-white shadow-lg max-w-[400px]  rounded-lg">
       <img
         src={item.img}
         alt="food"
-        className="w-full h-60 object-cover rounded-lg"
+        className="max-w-[400px] w-full h-50 sm:h-60 object-cover rounded-lg"
       />
       <div className="space-y-4 p-6">
         <h1 className="text-xl font-bold">{item.name}</h1>
@@ -80,9 +89,9 @@ const Card = ({ item }) => {
             ))}
           </select>
         </div>
-        <div className="flex items-center justify-center gap-3">
-          <div className="bg-slate-800 text-white py-2 px-4 text-center rounded-lg flex-1">
-            <p>{totalPrice}</p>
+        <div className=" flex-col flex sm:flex-row items-center justify-center gap-3 ">
+          <div className="bg-slate-800 text-white py-2 px-4 text-center rounded-lg flex-1 sm:w-auto w-full">
+            <p>${totalPrice}</p>
           </div>
           <button
             className="py-2 px-4 text-center font-bold rounded-lg w-full cursor-pointer flex-1 border-2 border-orange-500 bg-transparent text-orange-500"

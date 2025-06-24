@@ -32,7 +32,7 @@ const FoodData = ({ searchTerm }) => {
                 >
                   {category.CategoryName}
                 </div>
-                <div className="my-10  grid grid-cols-3 gap-5 justify-self-center">
+                <div className="my-10  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-self-center  px-6">
                   {foodItems.length > 0 ? (
                     foodItems
                       .filter(

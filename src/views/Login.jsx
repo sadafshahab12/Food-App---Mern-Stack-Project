@@ -1,8 +1,15 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { FaEyeSlash, FaRegEye } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [userCredentials, setUserCredentials] = useState({
+    email: "",
+    password: "",
+  });
+  const [showPassword, setShowPassword] = useState(false);
+  const [fieldError, setFieldError] = useState({
     email: "",
     password: "",
   });
@@ -22,10 +29,22 @@ const Login = () => {
       }),
     });
     const data = await response.json();
-    console.log(data);
+
 
     if (!data.success) {
-      alert("Invalid Credentials.");
+      const newError = { email: "", password: "" };
+
+      if (data.errors && Array.isArray(data.errors)) {
+        data.errors.forEach((error) => {
+          console.log(error);
+          if (error.path === "password") {
+            newError.password = error.msg;
+          }
+        });
+      } else {
+        newError.email = data.errors;
+      }
+      setFieldError(newError);
     } else {
       localStorage.setItem("userEmail", userCredentials.email);
       localStorage.setItem("authToken", data.authToken);
@@ -36,10 +55,14 @@ const Login = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserCredentials({ ...userCredentials, [name]: value });
+    setFieldError((prevError) => ({
+      ...prevError,
+      [name]: "",
+    }));
   };
   return (
-    <div className=" flex justify-center my-8 items-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+    <div className=" flex justify-center my-8 items-center min-h-screen p-4">
+      <div className="bg-white p-4 sm:p-8 rounded-lg shadow-lg w-full max-w-md">
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">
           Welcome Back
         </h1>
@@ -59,12 +82,16 @@ const Login = () => {
               type="email"
               id="email"
               name="email"
+              value={userCredentials.email}
               placeholder="Enter your email"
-              className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-300 transition duration-200 ease-in"
               onChange={handleChange}
             />
+            {fieldError.email && (
+              <p className="text-red-600 text-sm mt-1">{fieldError.email}</p>
+            )}
           </div>
-          <div>
+          <div className="relative">
             <label
               htmlFor="password"
               className="block text-sm font-medium text-gray-700"
@@ -72,13 +99,31 @@ const Login = () => {
               Password
             </label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               name="password"
+              value={userCredentials.password}
               placeholder="Enter your password"
-              className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-300 transition duration-200 ease-in"
               onChange={handleChange}
             />
+            {showPassword ? (
+              <FaRegEye
+                size={22}
+                className="absolute  top-8.5 right-4 text-gray-400 cursor-pointer"
+                onClick={() => setShowPassword(!showPassword)}
+              />
+            ) : (
+              <FaEyeSlash
+                size={22}
+                className="absolute  top-8.5 right-4 text-gray-400 cursor-pointer"
+                onClick={() => setShowPassword(!showPassword)}
+              />
+            )}
+
+            {fieldError.password && (
+              <p className="text-red-600 text-sm mt-1">{fieldError.password}</p>
+            )}
           </div>
           <button
             type="submit"

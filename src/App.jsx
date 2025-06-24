@@ -6,10 +6,20 @@ import Login from "./views/Login";
 import SignUp from "./views/SignUp";
 import Footer from "./views/Footer";
 import { CartProvider } from "./components/ContextReducer";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        toastOptions={{
+          style: {
+            marginTop: "60px",
+          },
+        }}
+      />
       <CartProvider>
         <BrowserRouter>
           <Header />

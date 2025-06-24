@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaEyeSlash, FaRegEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
@@ -9,36 +10,79 @@ const SignUp = () => {
     password: "",
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // it is post method with url we have to send body , data  coming from user through this form
-    const response = await fetch("http://localhost:5000/auth/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: userCredentials.name,
-        location: userCredentials.location,
-        email: userCredentials.email,
-        password: userCredentials.password,
-      }),
-    });
-    const data = await response.json();
-    console.log(data);
+  const [fieldError, setFieldError] = useState({
+    name: [],
+    location: "",
+    email: "",
+    password: [], // For multiple password errors
+  });
 
-    if (!data.success) {
-      alert("Invalid Credentials.");
-    }
-  };
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserCredentials({ ...userCredentials, [name]: value });
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const response = await fetch("http://localhost:5000/auth/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userCredentials),
+    });
+
+    const data = await response.json();
+    console.log(data);
+
+    if (!data.success) {
+      const newError = {
+        name: [],
+        location: "",
+        email: "",
+        password: [],
+      };
+
+      data.errors.forEach((error) => {
+        if (error.path === "name") {
+          newError.name.push(error.msg);
+        }
+        if (error.path === "location") {
+          newError.location = error.msg;
+        }
+        if (error.path === "email") {
+          newError.email = error.msg;
+        }
+        if (error.path === "password") {
+          newError.password.push(error.msg);
+        }
+      });
+
+      setFieldError(newError);
+    } else {
+      // Reset form if successful
+      setUserCredentials({
+        name: "",
+        location: "",
+        email: "",
+        password: "",
+      });
+      setFieldError({
+        name: [],
+        location: "",
+        email: "",
+        password: [],
+      });
+      alert("Signup successful!");
+    }
+  };
+
   return (
-    <div className=" flex justify-center my-8 items-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+    <div className="flex justify-center mt-20 items-center min-h-screen p-4">
+      <div className="bg-white p-4 sm:p-8 rounded-lg shadow-lg w-full max-w-md">
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">
           Join Our Food App
         </h1>
@@ -47,6 +91,7 @@ const SignUp = () => {
         </p>
 
         <form className="space-y-4" onSubmit={handleSubmit}>
+          {/* Name Field */}
           <div>
             <label
               htmlFor="name"
@@ -59,10 +104,23 @@ const SignUp = () => {
               id="name"
               name="name"
               placeholder="Enter your name"
-              className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={userCredentials.name}
               onChange={handleChange}
+              className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-300 transition duration-200 ease-in"
             />
+
+            {fieldError.name && (
+              <ul className="text-red-600 text-sm mt-1 list-disc list-inside">
+                {fieldError.name.map((err, idx) => (
+                  <li key={idx} className="list-none">
+                    {err}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
+
+          {/* Location Field */}
           <div>
             <label
               htmlFor="location"
@@ -75,10 +133,16 @@ const SignUp = () => {
               id="location"
               name="location"
               placeholder="Enter your location"
-              className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={userCredentials.location}
               onChange={handleChange}
+              className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-300 transition duration-200 ease-in"
             />
+            {fieldError.location && (
+              <p className="text-red-600 text-sm mt-1">{fieldError.location}</p>
+            )}
           </div>
+
+          {/* Email Field */}
           <div>
             <label
               htmlFor="email"
@@ -91,11 +155,17 @@ const SignUp = () => {
               id="email"
               name="email"
               placeholder="Enter your email"
-              className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={userCredentials.email}
               onChange={handleChange}
+              className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-300 transition duration-200 ease-in"
             />
+            {fieldError.email && (
+              <p className="text-red-600 text-sm mt-1">{fieldError.email}</p>
+            )}
           </div>
-          <div>
+
+          {/* Password Field */}
+          <div className="relative">
             <label
               htmlFor="password"
               className="block text-sm font-medium text-gray-700"
@@ -103,14 +173,40 @@ const SignUp = () => {
               Password
             </label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               name="password"
               placeholder="Create a password"
-              className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={userCredentials.password}
               onChange={handleChange}
+              className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-300 transition duration-200 ease-in"
             />
+            {showPassword ? (
+              <FaRegEye
+                size={22}
+                className="absolute top-8 right-4 text-gray-400 cursor-pointer"
+                onClick={() => setShowPassword(!showPassword)}
+              />
+            ) : (
+              <FaEyeSlash
+                size={22}
+                className="absolute top-8 right-4 text-gray-400 cursor-pointer"
+                onClick={() => setShowPassword(!showPassword)}
+              />
+            )}
+            {/* Show multiple password errors */}
+            {fieldError.password.length > 0 && (
+              <ul className="text-red-600 text-sm mt-1 list-disc list-inside">
+                {fieldError.password.map((err, idx) => (
+                  <li className="list-none" key={idx}>
+                    {err}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
+
+          {/* Submit Button */}
           <button
             type="submit"
             className="w-full bg-slate-800 text-white p-2 rounded-md cursor-pointer hover:bg-slate-700 transition duration-200"
@@ -119,9 +215,10 @@ const SignUp = () => {
           </button>
         </form>
 
+        {/* Footer Links */}
         <div className="text-center text-gray-600 mt-6">
           Already have an account?{" "}
-          <Link to={"/login"} className="text-blue-600 hover:underline">
+          <Link to="/login" className="text-blue-600 hover:underline">
             Log in
           </Link>
         </div>

@@ -4,7 +4,7 @@ import { FaFacebook } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-slate-800 text-white ">
+    <footer className="bg-slate-800 text-white px-6">
       <div className="flex justify-between items-center max-w-6xl mx-auto py-8">
         <div className="logo">Food</div>
         <div>2021.Food Inc.</div>
