@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [userCredentials, setUserCredentials] = useState({
@@ -9,7 +10,7 @@ const SignUp = () => {
     email: "",
     password: "",
   });
-
+  const navigate = useNavigate();
   const [fieldError, setFieldError] = useState({
     name: [],
     location: "",
@@ -79,7 +80,10 @@ const SignUp = () => {
         email: "",
         password: [],
       });
-      alert("Signup successful!");
+      toast.success("Account Created Successfully", {
+        duration: 2000,
+      });
+      navigate("/login");
     }
   };
 
