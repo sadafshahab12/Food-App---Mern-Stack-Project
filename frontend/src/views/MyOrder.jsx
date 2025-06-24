@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import Skeleton from "../components/Skeleton"; // your skeleton component
 
 const MyOrder = () => {
+  useEffect(() => {
+    document.title = "My Order| Food App";
+  }, []);
   const [myOrder, setMyOrder] = useState({});
   const [isLoading, setIsLoading] = useState(true); // loading state added
 

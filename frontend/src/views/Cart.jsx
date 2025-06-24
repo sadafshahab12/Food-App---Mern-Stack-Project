@@ -2,6 +2,7 @@ import toast from "react-hot-toast";
 import { useCart, useDispatchCard } from "../components/ContextReducer";
 import { FaRegTrashAlt } from "react-icons/fa";
 
+
 const Cart = ({ closeCart }) => {
   const data = useCart();
   let dispatch = useDispatchCard();

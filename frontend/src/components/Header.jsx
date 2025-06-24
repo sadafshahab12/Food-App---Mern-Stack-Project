@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { IoIosLogOut } from "react-icons/io";
 import { IoCartOutline, IoClose } from "react-icons/io5";

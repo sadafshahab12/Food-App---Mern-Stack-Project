@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  useEffect(() => {
+    document.title = "Sign Up | Food App";
+  }, []);
   const [userCredentials, setUserCredentials] = useState({
     name: "",
     location: "",

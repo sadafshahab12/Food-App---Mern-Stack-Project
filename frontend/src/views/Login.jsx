@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  useEffect(() => {
+    document.title = "Login | Food App";
+  }, []);
   const [userCredentials, setUserCredentials] = useState({
     email: "",
     password: "",
@@ -18,16 +21,19 @@ const Login = () => {
     e.preventDefault();
 
     // it is post method with url we have to send body , data  coming from user through this form
-    const response = await fetch(`${import.meta.env.VITE_REACT_BACKEND_BASE_URL}/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: userCredentials.email,
-        password: userCredentials.password,
-      }),
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_REACT_BACKEND_BASE_URL}/auth/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: userCredentials.email,
+          password: userCredentials.password,
+        }),
+      }
+    );
     const data = await response.json();
 
     if (!data.success) {
