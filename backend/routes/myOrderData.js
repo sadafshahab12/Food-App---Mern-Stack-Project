@@ -5,45 +5,60 @@ const myOrderDataRouter = express.Router();
 
 myOrderDataRouter.post("/my-order-data", async (req, res) => {
   try {
-    let myData = await Order.findOne({ email: req.body.email });
-
-    // Check if order_data exists
-    if (!myData || !myData.order_data) {
-      return res.json({ orderData: { email: req.body.email, orders: [] } });
+    // Always validate the input
+    const { email } = req.body;
+    if (!email) {
+      return res.status(400).json({ error: "Email is required" });
     }
 
-    // Reshape the nested mess into a clean structure
+    // Find the order data by email
+    const myData = await Order.findOne({ email });
+
+    // If no data found or no order_data present
+    if (!myData || !Array.isArray(myData.order_data)) {
+      return res.json({
+        orderData: {
+          email: email,
+          orders: [], // always return an empty array to avoid frontend breaking
+        },
+      });
+    }
+
+    // Reshape the messy data into clean order groups
     const cleanedOrders = [];
     let currentOrder = null;
 
     myData.order_data.forEach((entry) => {
       if (Array.isArray(entry)) {
-        // Nested order group
+        // Nested group
         entry.forEach((nestedEntry) => {
           if (nestedEntry.order_date) {
-            // new date group
-            if (currentOrder) cleanedOrders.push(currentOrder); // push last order
+            if (currentOrder) cleanedOrders.push(currentOrder);
             currentOrder = { orderDate: nestedEntry.order_date, items: [] };
           } else {
-            // product
             if (currentOrder) currentOrder.items.push(nestedEntry);
           }
         });
       } else if (entry.order_date) {
-        // new date group (non-nested)
         if (currentOrder) cleanedOrders.push(currentOrder);
         currentOrder = { orderDate: entry.order_date, items: [] };
       } else {
-        // product
         if (currentOrder) currentOrder.items.push(entry);
       }
     });
 
-    if (currentOrder) cleanedOrders.push(currentOrder); // push final group
-    cleanedOrders.reverse();
-    res.json({ orderData: { email: myData.email, orders: cleanedOrders } });
+    if (currentOrder) cleanedOrders.push(currentOrder); // push last group
+    cleanedOrders.reverse(); // latest orders first
+
+    res.json({
+      orderData: {
+        email: myData.email,
+        orders: cleanedOrders || [], // never undefined, always an array
+      },
+    });
   } catch (error) {
-    return res.status(500).send("Server Error: " + error.message);
+    console.error("Error in /my-order-data:", error);
+    res.status(500).json({ error: "Server Error: " + error.message });
   }
 });
 
