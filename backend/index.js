@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const mongoDBConnect = require("./db");
 const cors = require("cors");
@@ -8,7 +9,7 @@ const orderDataRouter = require("./routes/OrderData");
 const myOrderDataRouter = require("./routes/myOrderData");
 const app = express();
 mongoDBConnect();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 app.use(
   cors({
