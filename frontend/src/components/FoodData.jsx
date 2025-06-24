@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import Card from "../components/Card";
-import Skeleton from "../components/Skeleton"; // You can create a simple Skeleton component
+import Skeleton from "../components/Skeleton";
 
 const FoodData = ({ searchTerm }) => {
   const [foodItems, setFoodItems] = useState([]);
   const [foodCategory, setFoodCategory] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); // 👈 New loading state
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async () => {
     try {
@@ -34,7 +34,7 @@ const FoodData = ({ searchTerm }) => {
       setFoodCategory([]);
     } finally {
       setTimeout(() => {
-        setIsLoading(false); // 👈 loading finished here
+        setIsLoading(false);
       }, 1500);
     }
   };
@@ -43,23 +43,28 @@ const FoodData = ({ searchTerm }) => {
     fetchData();
   }, []);
 
+  if (isLoading) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 p-6 max-w-6xl mx-auto">
+        {[1, 2, 3, 4, 5, 6].map((n) => (
+          <Skeleton key={n} />
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div>
-      {isLoading ? (
-        // Show Skeletons while loading
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 p-6 max-w-6xl mx-auto">
-          {[1, 2, 3, 4, 5, 6].map((n) => (
-            <Skeleton key={n} />
-          ))}
-        </div>
-      ) : foodCategory && foodCategory.length > 0 ? (
+      {foodCategory &&
+        foodCategory.length > 0 &&
         foodCategory.map((category, index) => (
           <div key={index}>
             <div className="text-xl font-bold cursor-pointer border-b border-slate-300 py-4 px-10 mx-10">
               {category.CategoryName}
             </div>
             <div className="my-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-self-center px-6">
-              {foodItems && foodItems.length > 0 ? (
+              {foodItems &&
+                foodItems.length > 0 &&
                 foodItems
                   .filter(
                     (items) =>
@@ -70,20 +75,10 @@ const FoodData = ({ searchTerm }) => {
                   )
                   .map((filterItems) => (
                     <Card key={filterItems._id} item={filterItems} />
-                  ))
-              ) : (
-                <div>
-                  <p>No Category Found</p>
-                </div>
-              )}
+                  ))}
             </div>
           </div>
-        ))
-      ) : (
-        <div>
-          <p>No Category Found</p>
-        </div>
-      )}
+        ))}
     </div>
   );
 };

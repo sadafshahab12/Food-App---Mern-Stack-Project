@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import Skeleton from "../components/Skeleton"; // your skeleton component
+import Skeleton from "../components/Skeleton";
 
 const MyOrder = () => {
   useEffect(() => {
-    document.title = "My Order| Food App";
+    document.title = "My Order | Food App";
   }, []);
+
   const [myOrder, setMyOrder] = useState({});
-  const [isLoading, setIsLoading] = useState(true); // loading state added
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +30,7 @@ const MyOrder = () => {
         console.error("Error fetching data:", error);
       } finally {
         setTimeout(() => {
-          setIsLoading(false); // done loading
+          setIsLoading(false);
         }, 1500);
       }
     };
@@ -37,21 +38,24 @@ const MyOrder = () => {
     fetchData();
   }, []);
 
+  if (isLoading) {
+    return (
+      <div className="mt-40 max-w-6xl mx-auto px-6 min-h-screen mb-20">
+        <div className="mb-8">
+          <div className="h-6 w-40 bg-gray-200 animate-pulse mb-4 rounded"></div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
+            {[1, 2, 3, 4, 5, 6].map((n) => (
+              <Skeleton key={n} />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="mt-40 max-w-6xl mx-auto px-6 min-h-screen mb-20">
-      {isLoading ? (
-        // Show skeletons while loading
-        <>
-          <div className="mb-8">
-            <div className="h-6 w-40 bg-gray-200 animate-pulse mb-4 rounded"></div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
-              {[1, 2, 3, 4, 5, 6].map((n) => (
-                <Skeleton key={n} />
-              ))}
-            </div>
-          </div>
-        </>
-      ) : myOrder.orderData?.orders.length > 0 ? (
+      {myOrder.orderData?.orders.length > 0 &&
         myOrder.orderData.orders.map((orderGroup, index) => (
           <div key={index} className="mb-8">
             <h2 className="text-xl font-bold text-slate-800 border-b border-slate-300 py-4">
@@ -84,12 +88,7 @@ const MyOrder = () => {
               ))}
             </div>
           </div>
-        ))
-      ) : (
-        <>
-          <div>No order place yet.</div>
-        </>
-      )}
+        ))}
     </div>
   );
 };
