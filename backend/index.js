@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoDBConnect = require("./db");
 const cors = require("cors");
+const helmet = require("helmet");
 const loginUserRouter = require("./routes/LoginUser");
 const createUserRouter = require("./routes/CreateUser");
 const foodDataRouter = require("./routes/FoodData");
@@ -15,10 +16,10 @@ app.use(
   cors({
     origin: process.env.FRONT_END_URL,
     methods: ["GET", "POST", "OPTIONS"],
-    allowedHeaders: ["Content-Type"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-
+app.use(helmet);
 app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello World");
