@@ -39,7 +39,7 @@ const Cart = ({ closeCart }) => {
       }, 500);
     }
     toast.success(
-      `Thank you for ordering with us! Your tasty meal is now being prepared.  `,
+      `Thank you for ordering with us! Your tasty meal is now being prepared.`,
       {
         duration: 2000,
         style: {
