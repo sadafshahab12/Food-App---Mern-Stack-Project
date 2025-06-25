@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
+
 const ga_id = import.meta.env.VITE_GA_ID;
 
 if (ga_id) {
