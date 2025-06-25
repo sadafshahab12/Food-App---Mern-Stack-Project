@@ -10,11 +10,9 @@ import { Toaster } from "react-hot-toast";
 import ScrollToTop from "./components/ScrollToTop";
 import About from "./views/About";
 import Contact from "./views/Contact";
-import usePageTracking from "./components/usePageTracking";
 import PageTracker from "./PageTracker";
 
 function App() {
-  usePageTracking();
   return (
     <>
       <Toaster
