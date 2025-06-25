@@ -1,4 +1,4 @@
-import {  Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./views/Home";
 import MyOrder from "./views/MyOrder";
@@ -10,7 +10,9 @@ import { Toaster } from "react-hot-toast";
 import ScrollToTop from "./components/ScrollToTop";
 import About from "./views/About";
 import Contact from "./views/Contact";
+import ReactGA from "./analytics";
 import usePageTracking from "./components/usePageTracking";
+import PageTracker from "./PageTracker";
 
 function App() {
   usePageTracking();
@@ -26,8 +28,9 @@ function App() {
         }}
       />
       <CartProvider>
-
+        <BrowserRouter>
           <ScrollToTop />
+          <PageTracker />
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
@@ -38,7 +41,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
           </Routes>
           <Footer />
-
+        </BrowserRouter>
       </CartProvider>
     </>
   );
